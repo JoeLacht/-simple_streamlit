@@ -20,8 +20,8 @@ if uploaded_file is not None:
         #     st.dataframe(tips.head(5))
 
         if st.sidebar.checkbox('Динамика чаевых в **январе 2023**'):
-            st.write('***Для этого графика была сформирована новая конолка time_order, заполненная рандомными числами января 2023 года***')
-            st.write('Загрузка графика в PNG')
+            st.write('***Для этого графика была сформирована новая колонка time_order, заполненная рандомными числами января 2023 года***')
+            st.write('Скачивание графика в PNG')
  
             n = len(tips)
             tips['time_order'] = pd.to_datetime('2023-01-01') + pd.to_timedelta(np.random.randint(0, 31, size = n), unit='D')
@@ -51,7 +51,7 @@ if uploaded_file is not None:
 
         if st.sidebar.checkbox('Гистограмма **счетов**'):
             st.write('Гистограмма счетов')
-            st.write('Загрузка графика в PNG')
+            st.write('Скачивание графика в PNG')
 
             fig = px.histogram(tips,
                    x='total_bill',
@@ -67,18 +67,18 @@ if uploaded_file is not None:
 
             st.plotly_chart(fig)  
 
-            img_bytes = fig.to_image(format="png")
+            html_bytes = fig.to_html().encode('utf-8')
 
             st.download_button(
-                label="Скачать график в PNG",
-                data=img_bytes,
-                file_name="tips_total_bill.png",
-                mime="image/png"
+                label="Скачать график в HTML",
+                data=html_bytes,
+                file_name="tips_bars_html.html",
+                mime="text/html"
             )
         
         if st.sidebar.checkbox('Cвязь между **счетом, чаевыми и размером группы**, с разделением по **полу**'):
             st.write('Cвязь между счетом, чаевыми и размером группы, с разделением по полу')
-            st.write('Загрузка графика в HTML')
+            st.write('Скачивание графика в HTML')
 
             fig = px.scatter(tips,
                 x='total_bill',
@@ -106,7 +106,7 @@ if uploaded_file is not None:
         
         if st.sidebar.checkbox('Cвязь между **счетом и чаевыми**, по **полу и курению**'):
                 st.write('Cвязь между счетом и чаевыми, по полу и курению')
-                st.write('Загрузка графика в PNG')
+                st.write('Скачивание графика в PNG')
 
                 fig, axes = plt.subplots(1, 2, figsize=(10, 6)) 
 
