@@ -51,7 +51,7 @@ if uploaded_file is not None:
 
         if st.sidebar.checkbox('Гистограмма **счетов**'):
             st.write('Гистограмма счетов')
-            st.write('Скачивание графика в PNG')
+            st.write('Скачивание графика в HTML')
 
             fig = px.histogram(tips,
                    x='total_bill',
